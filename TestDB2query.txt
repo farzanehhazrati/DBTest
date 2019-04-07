@@ -1,0 +1,302 @@
+query_test0=select * from wb_proccodes
+query_test1=WITH pg AS
+(
+  SELECT LGNUMBER 
+  FROM (
+       SELECT LGNUMBER,ROW_NUMBER() OVER(  ORDER BY LGNUMBER  ) AS RID
+              FROM WB_ZEMANATNAME
+WHERE   DATEGEN<='13950931'  AND    DATEGEN>='13940901'  FETCH FIRST 20 ROWS ONLY          ) X
+          WHERE RID >0 AND   RID<=20
+  
+  
+ )
+SELECT  W.LGNUMBER
+      ,CTYPE
+      ,BCODE
+      ,SCODE
+      ,ISSUSP
+      ,ISTERM
+     ,CONCAT(ISSUSP,ISTERM )  AS LATENCY
+      ,CASE
+        WHEN (ISDEBT='N' AND ISTERM='Y') THEN 'N'
+        ELSE 'Y' END
+      ,ISDEBT
+      ,SENDER
+      ,BRNUMBER
+      ,PERNAME
+      ,PERFAMILY
+      ,NIDNO
+      ,IDNO
+      ,BRTDATE
+      ,CITY
+      ,LGAMT
+      ,RAMT
+      ,PAMT
+      ,EXTRINFO
+      ,DATEGEN
+      ,DATEISU
+      ,DATESTL
+      ,DATETERM
+      ,DATECODEEXP
+      ,DATEEXPLG
+      ,DATESARRESID
+      ,REQMSGID
+      ,GENMSGID
+      ,USEMSGID
+      ,SFLAG
+      ,F32
+      ,F40A
+      ,F40C
+      ,F40E
+      ,F20
+      ,F30
+      ,F40B
+      ,F31D
+      ,F71BCOST
+      ,AMOBILE
+      ,AACNO
+      ,APCODE
+      ,AADDRESS
+      ,BNAME
+      ,BFAMILY
+      ,BNIDNO
+      ,BPCODE
+      ,BMOBILE
+      ,RECEIVER
+   FROM WB_ZEMANATNAME  W INNER JOIN pg ON W.LGNUMBER = pg.LGNUMBER  ORDER BY LGNUMBER
+
+query_test2=WITH pg AS 
+(
+  SELECT MSGID 
+  FROM (
+       SELECT MSGID,ROW_NUMBER() OVER(  ORDER BY MSGID  ) AS RID
+              FROM WB_MESSAGES
+ FETCH FIRST 20 ROWS ONLY          ) X
+          WHERE RID >10 AND   RID<=20
+  
+  
+ )
+SELECT  W.*  FROM WB_MESSAGES  W INNER JOIN pg ON W.MSGID = pg.MSGID  ORDER BY W.MSGID ;
+
+query_test3=SELECT COUNT(*) CNT FROM  WB_ZEMANATNAME  
+
+query_test4= WITH pg AS 
+(
+  SELECT LGNUMBER 
+  FROM (
+       SELECT LGNUMBER,ROW_NUMBER() OVER(  ORDER BY LGNUMBER  ) AS RID
+              FROM WB_ZEMANATNAME
+WHERE  (BCODE='ANSB' )  FETCH FIRST 20 ROWS ONLY          ) X
+          WHERE RID >0 AND   RID<=20
+  
+  
+ )
+SELECT  W.LGNUMBER
+      ,CTYPE
+      ,BCODE
+      ,SCODE
+      ,ISSUSP
+      ,ISTERM
+     ,CONCAT(ISSUSP,ISTERM )  AS LATENCY
+      ,CASE
+        WHEN (ISDEBT='N' AND ISTERM='Y') THEN 'N'
+        ELSE 'Y' END
+        ISDEBT
+      ,SENDER
+      ,BRNUMBER
+      ,PERNAME
+      ,PERFAMILY
+      ,NIDNO
+      ,IDNO
+      ,BRTDATE
+      ,CITY
+      ,LGAMT
+      ,RAMT
+      ,PAMT
+      ,EXTRINFO
+      ,DATEGEN
+      ,DATEISU
+      ,DATESTL
+      ,DATETERM
+      ,DATECODEEXP
+      ,DATEEXPLG
+      ,DATESARRESID
+      ,REQMSGID
+      ,GENMSGID
+      ,USEMSGID
+      ,SFLAG
+      ,F32
+      ,F40A
+      ,F40C
+      ,F40E
+      ,F20
+      ,F30
+      ,F40B
+      ,F31D
+      ,F71BCOST
+      ,AMOBILE
+      ,AACNO
+      ,APCODE
+      ,AADDRESS
+      ,BNAME
+      ,BFAMILY
+      ,BNIDNO
+      ,BPCODE
+      ,BMOBILE
+      ,RECEIVER
+   FROM WB_ZEMANATNAME  W INNER JOIN pg ON W.LGNUMBER = pg.LGNUMBER  ORDER BY LGNUMBER ;
+
+query_test5=WITH pg AS 
+(
+  SELECT LGNUMBER 
+  FROM (
+       SELECT LGNUMBER,ROW_NUMBER() OVER(  ORDER BY CONCAT(ISDEBT,ISTERM )  ASC  ) AS RID
+              FROM WB_ZEMANATNAME
+ FETCH FIRST 20 ROWS ONLY          ) X
+          WHERE RID >0 AND   RID<=20
+  
+  
+ )
+SELECT  W.LGNUMBER
+      ,CTYPE
+      ,BCODE
+      ,SCODE
+      ,ISSUSP
+      ,ISTERM
+     ,CONCAT(ISSUSP,ISTERM )  AS LATENCY
+      ,CASE
+        WHEN (ISDEBT='N' AND ISTERM='Y') THEN 'N'
+        ELSE 'Y' END
+        ISDEBT
+      ,SENDER
+      ,BRNUMBER
+      ,PERNAME
+      ,PERFAMILY
+      ,NIDNO
+      ,IDNO
+      ,BRTDATE
+      ,CITY
+      ,LGAMT
+      ,RAMT
+      ,PAMT
+      ,EXTRINFO
+      ,DATEGEN
+      ,DATEISU
+      ,DATESTL
+      ,DATETERM
+      ,DATECODEEXP
+      ,DATEEXPLG
+      ,DATESARRESID
+      ,REQMSGID
+      ,GENMSGID
+      ,USEMSGID
+      ,SFLAG
+      ,F32
+      ,F40A
+      ,F40C
+      ,F40E
+      ,F20
+      ,F30
+      ,F40B
+      ,F31D
+      ,F71BCOST
+      ,AMOBILE
+      ,AACNO
+      ,APCODE
+      ,AADDRESS
+      ,BNAME
+      ,BFAMILY
+      ,BNIDNO
+      ,BPCODE
+      ,BMOBILE
+      ,RECEIVER
+   FROM WB_ZEMANATNAME  W INNER JOIN pg ON W.LGNUMBER = pg.LGNUMBER  ORDER BY CONCAT(ISDEBT,ISTERM )  ASC 
+
+query_test6=WITH pg AS 
+(
+  SELECT LGNUMBER 
+  FROM (
+       SELECT LGNUMBER,ROW_NUMBER() OVER(  ORDER BY CONCAT(ISDEBT,ISTERM )  ASC  ) AS RID
+              FROM WB_ZEMANATNAME
+WHERE   NOT (ISDEBT='N' AND ISTERM='Y')   FETCH FIRST 20 ROWS ONLY          ) X
+          WHERE RID >0 AND   RID<=20
+  
+  
+ )
+SELECT  W.LGNUMBER
+      ,CTYPE
+      ,BCODE
+      ,SCODE
+      ,ISSUSP
+      ,ISTERM
+     ,CONCAT(ISSUSP,ISTERM )  AS LATENCY
+      ,CASE
+        WHEN (ISDEBT='N' AND ISTERM='Y') THEN 'N'
+        ELSE 'Y' END
+        ISDEBT
+      ,SENDER
+      ,BRNUMBER
+      ,PERNAME
+      ,PERFAMILY
+      ,NIDNO
+      ,IDNO
+      ,BRTDATE
+      ,CITY
+      ,LGAMT
+      ,RAMT
+      ,PAMT
+      ,EXTRINFO
+      ,DATEGEN
+      ,DATEISU
+      ,DATESTL
+      ,DATETERM
+      ,DATECODEEXP
+      ,DATEEXPLG
+      ,DATESARRESID
+      ,REQMSGID
+      ,GENMSGID
+      ,USEMSGID
+      ,SFLAG
+      ,F32
+      ,F40A
+      ,F40C
+      ,F40E
+      ,F20
+      ,F30
+      ,F40B
+      ,F31D
+      ,F71BCOST
+      ,AMOBILE
+      ,AACNO
+      ,APCODE
+      ,AADDRESS
+      ,BNAME
+      ,BFAMILY
+      ,BNIDNO
+      ,BPCODE
+      ,BMOBILE
+      ,RECEIVER
+   FROM WB_ZEMANATNAME  W INNER JOIN pg ON W.LGNUMBER = pg.LGNUMBER  ORDER BY CONCAT(ISDEBT,ISTERM )  ASC 
+
+
+query_test7= WITH pg AS 
+(
+  SELECT MSGID 
+  FROM (
+       SELECT MSGID,ROW_NUMBER() OVER(  ORDER BY MSGID ASC  ) AS RID
+              FROM WB_MESSAGES
+WHERE   LASTUDATE<='13950931'  AND    LASTUDATE>='13950901'  FETCH FIRST 10 ROWS ONLY          ) X
+          WHERE RID >0 AND   RID<=10
+  
+  
+ )
+SELECT  W.*  FROM WB_MESSAGES  W INNER JOIN pg ON W.MSGID = pg.MSGID  ORDER BY MSGID ASC 
+
+
+query_test8=SELECT COUNT(*) CNT FROM WB_INMSG  WHERE  ENTDATE LIKE '%13921228%'  
+
+query_test9=SELECT TYPE,COUNT(*) CNT FROM WB_MESSAGES WHERE LASTUDATE='13940901' GROUP BY TYPE
+UNION
+SELECT 'total' TYPE,COUNT(*) CNT FROM WB_MESSAGES WHERE LASTUDATE='13940901'
+query_test10=SELECT Count(*)   FROM WB_MESSAGES             WHERE  LASTUDATE = '13950901'
+query_test11=SELECT * FROM WB_INMSG where ENTDATE>='13951001'

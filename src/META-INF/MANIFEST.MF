@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: log4j.jar db2jcc4.jar encryptedDS.jar log4j-extras.jar db2
+ jcc4_license_cu.jar db2jcc4_license_cisuz.jar
+Main-Class: DB2Test
+
